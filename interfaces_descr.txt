@@ -9,47 +9,47 @@ BASE CLASSES (INTERFACES)
 These interfaces are intended to be the low-level basis of the rest
 of the whole system.
 
-class 'Gadget':
+class 'Gadget' [inherits from <class 'object'>]:
 	all gadgets should inherit this.
 	method 'getModelName':
 		returns: <class 'str'>
 		description: returns the device's model name.
 
-class 'InputGadget':
+class 'InputGadget' [inherits from <class 'base.Gadget'>]:
 	any gadget that gets some signal from the outside world should inherit this.
 
-class 'OutputGadget':
+class 'OutputGadget' [inherits from <class 'base.Gadget'>]:
 	any gadget that produces some signal to the outside world should inherit this.
 
-class 'ScalarSensor':
+class 'ScalarSensor' [inherits from <class 'base.InputGadget'>]:
 	any gadget which value of interest is a physical scalar quantity should inherit this.
 	method 'getIntensity':
 		returns: <class 'float'>
 		description: returns the intensity of the quantity measured by the device.
 
-class 'VectorSensor':
+class 'VectorSensor' [inherits from <class 'base.InputGadget'>]:
 	any gadget which value of interest is a physical vector quantity should inherit this.
-	method 'getZIntensity':
-		returns: <class 'float'>
-		description: returns the intensity of the quantity measured by the device on the z axis.
-	method 'getXIntensity':
-		returns: <class 'float'>
-		description: returns the intensity of the quantity measured by the device on the x axis.
 	method 'getYIntensity':
 		returns: <class 'float'>
 		description: returns the intensity of the quantity measured by the device on the y axis.
+	method 'getXIntensity':
+		returns: <class 'float'>
+		description: returns the intensity of the quantity measured by the device on the x axis.
+	method 'getZIntensity':
+		returns: <class 'float'>
+		description: returns the intensity of the quantity measured by the device on the z axis.
 
-class 'Receiver':
+class 'Receiver' [inherits from <class 'base.InputGadget'>]:
 	any gadget which value of interest is a signal from another gadget 
        should inherit this.
 
-class 'Transmitter':
+class 'Transmitter' [inherits from <class 'base.OutputGadget'>]:
 	any gadget which sends a signal to another gadget should inherit this.
 
 SOME DEVICES CLASSES (INTERFACES)
 These interfaces define the devices, their services and behavior.
 
-class 'Motor':
+class 'Motor' [inherits from <class 'base.OutputGadget'>]:
 	interface that represents motors.
 	method 'move':
 		inputs: intensity(<class 'float'>)
@@ -58,7 +58,7 @@ class 'Motor':
            intensity is a value between [-1,1], whereas -1 is the maximum speed
            in reverse direction and 1 is the maximum speed in normal direction.
 
-class 'LightSource':
+class 'LightSource' [inherits from <class 'base.OutputGadget'>]:
 	interface that represents some light source.
 	method 'lighten':
 		inputs: intensity(<class 'float'>)
@@ -67,13 +67,13 @@ class 'LightSource':
            intensity is a value between [0,1], whereas 0 is the mininum possible 
            luminosity and 1 is the maximum possible luminosity.
 
-class 'Button':
+class 'Button' [inherits from <class 'base.InputGadget'>]:
 	interface that represents a simple button.
 	method 'pressed':
 		returns: <class 'bool'>
 		description: returns True if the button is/was held down and False otherwise.
 
-class 'FlameThrower':
+class 'FlameThrower' [inherits from <class 'base.OutputGadget'>]:
 	interface that represents flamethrower devices.
 	method 'fire':
 		inputs: intensity(<class 'float'>)
@@ -82,7 +82,7 @@ class 'FlameThrower':
            intensity is a value between [0,1], whereas 0 is the mininum possible
            fire intensity and 1 is the maximum.
 
-class 'DistanceSensor':
+class 'DistanceSensor' [inherits from <class 'base.ScalarSensor'>]:
 	interface that represents distance sensors. it may be an ultrassonic or infrared one,
        for example.
 	method 'getDistance':
@@ -90,7 +90,7 @@ class 'DistanceSensor':
 		description: returns the distance from the sensor in meters. the return value must be 
            greater or equal to zero.
 
-class 'LuminositySensor':
+class 'LuminositySensor' [inherits from <class 'base.ScalarSensor'>]:
 	interface that represents a light sensor.
 	method 'getLuminosity':
 		returns: <class 'float'>
@@ -98,7 +98,7 @@ class 'LuminositySensor':
            whereas 0 is the mininum luminosity possibly readable by the sensor 
            and 1 is the maximum.
 
-class 'GPS':
+class 'GPS' [inherits from <class 'base.Receiver'>]:
 	interface that represents a GPS receiver device.
 	method 'getNMEAMessage':
 		returns: <class 'str'>

@@ -36,7 +36,9 @@ def main():
     classes = dict([(name, cls) for name, cls in mod.__dict__.items() if isinstance(cls, type)])
 
     for key in BASE_CLASSES:
-        print("class '%s':" % key)
+        print(("class '%s'" % key) + ((" [inherits from %s]" % \
+                                       ", ".join(str(k) for k in classes[key].__bases__)) \
+                                       if classes[key].__bases__ else "") + ":")
         print("\t" + classes[key].__doc__)
 
         for k, m in classes[key].__dict__.items():
@@ -58,7 +60,9 @@ def main():
                         "")))
 
     for key in DEV_CLASSES:
-        print("class '%s':" % key)
+        print(("class '%s'" % key) + ((" [inherits from %s]" % \
+                                       ", ".join(str(k) for k in classes[key].__bases__)) \
+                                       if classes[key].__bases__ else "") + ":")
         print("\t" + classes[key].__doc__)
 
         for k, m in classes[key].__dict__.items():
