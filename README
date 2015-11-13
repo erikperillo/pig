@@ -1,0 +1,4 @@
+This is a draft with some ideas about how the interfaces can be modelled.
+Read the file interfaces_descr.txt to see the documentation about what was created so far.
+The modules base and devices contain Python classes and the utility describe_interfaces.py
+generates a documentation.
