@@ -1,0 +1,6 @@
+how to install pig:
+
+1. in the root directory, run:
+	$ ./setup.py install
+
+2. enjoy :^)
