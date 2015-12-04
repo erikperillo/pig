@@ -17,56 +17,70 @@ You should have received a copy of the GNU General Public License
 along with this.  If not, see <http://www.gnu.org/licenses/>. 
 """
 
-from . import base
+import base
 
 class Motor(base.OutputGadget):
     """interface that represents motors."""    
-    def move(intensity: float) -> None:
+    def move(self, intensity):
         """moves the motor with the speed defined by intensity.
            intensity is a value between [-1,1], whereas -1 is the maximum speed
-           in reverse direction and 1 is the maximum speed in normal direction."""
-        raise NotImplementedError("method must be implemented to comply with the interface")
+           in reverse direction and 1 is the maximum speed in normal direction.
+           intensity: float"""
+        raise NotImplementedError(base.NOT_IMPLEMENTED_MSG)
 
 class LightSource(base.OutputGadget):
     """interface that represents some light source."""    
-    def lighten(intensity: float) -> None:
+    def lighten(self, intensity):
         """produces light via the sensor with luminosity defined by intensity.
            intensity is a value between [0,1], whereas 0 is the mininum possible 
-           luminosity and 1 is the maximum possible luminosity."""
-        raise NotImplementedError("method must be implemented to comply with the interface")
+           luminosity and 1 is the maximum possible luminosity.
+           intensity: float"""
+        raise NotImplementedError(base.NOT_IMPLEMENTED_MSG)
 
 class Button(base.InputGadget):
     """interface that represents a simple button."""    
-    def pressed() -> bool:
-        """returns True if the button is/was held down and False otherwise."""
-        raise NotImplementedError("method must be implemented to comply with the interface")
+    def pressed(self):
+        """returns True if the button is/was held down and False otherwise.
+           return: bool"""
+        raise NotImplementedError(base.NOT_IMPLEMENTED_MSG)
+
+class Camera(base.InputGadget):
+    """interface that represents a camera."""    
+    def get_frame(self):
+        """returns an image representation.
+           return: <matrix>"""
+        raise NotImplementedError(base.NOT_IMPLEMENTED_MSG)
 
 class FlameThrower(base.OutputGadget):
     """interface that represents flamethrower devices."""
-    def fire(intensity: float) -> None:
+    def fire(self, intensity):
         """sends flaming death to the world.
            intensity is a value between [0,1], whereas 0 is the mininum possible
-           fire intensity and 1 is the maximum."""
-        raise NotImplementedError("method must be implemented to comply with the interface")
+           fire intensity and 1 is the maximum.
+           intensity: float"""
+        raise NotImplementedError(base.NOT_IMPLEMENTED_MSG)
 
 class DistanceSensor(base.ScalarSensor):
     """interface that represents distance sensors. it may be an ultrassonic or infrared one,
        for example."""    
-    def getDistance() -> float:
+    def value(self):
         """returns the distance from the sensor in meters. the return value must be 
-           greater or equal to zero."""
-        raise NotImplementedError("method must be implemented to comply with the interface")
+           greater or equal to zero.
+           return: float"""
+        raise NotImplementedError(base.NOT_IMPLEMENTED_MSG)
 
 class LuminositySensor(base.ScalarSensor):
     """interface that represents a light sensor."""
-    def getLuminosity() -> float:
+    def value(self):
         """gets the luminosity read by the sensor. the return value must be between [0,1], 
            whereas 0 is the mininum luminosity possibly readable by the sensor 
-           and 1 is the maximum."""
-        raise NotImplementedError("method must be implemented to comply with the interface")
+           and 1 is the maximum.
+           return: float"""
+        raise NotImplementedError(base.NOT_IMPLEMENTED_MSG)
 
 class GPS(base.Receiver):
     """interface that represents a GPS receiver device."""
-    def getNMEAMessage() -> str:
-        """gets a standard NMEA message from device.""" 
-        raise NotImplementedError("method must be implemented to comply with the interface")
+    def get_NMEA_message(self):
+        """gets a standard NMEA message from device.
+           return: str""" 
+        raise NotImplementedError(base.NOT_IMPLEMENTED_MSG)

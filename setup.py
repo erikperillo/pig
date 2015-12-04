@@ -10,4 +10,4 @@ setuptools.setup(name="pig",
                  author_email="erik.perillo@gmail.com",
                  license="GPL",
                  packages=["pig"],
-                 classifiers=["Programming Language :: Python :: 3"])
+                 classifiers=["Programming Language :: Python :: 2.7"])
