@@ -11,9 +11,13 @@ of the whole system.
 
 class 'Gadget' [inherits from <class 'object'>]:
 	all gadgets should inherit this.
-	method 'getModelName':
+	method 'model_name':
 		returns: <class 'str'>
 		description: returns the device's model name.
+	method 'supports':
+		inputs: platform(<class 'str'>)
+		returns: <class 'bool'>
+		description: returns true if the gadget is designed for some platform or false if not
 
 class 'InputGadget' [inherits from <class 'base.Gadget'>]:
 	any gadget that gets some signal from the outside world should inherit this.
@@ -23,19 +27,19 @@ class 'OutputGadget' [inherits from <class 'base.Gadget'>]:
 
 class 'ScalarSensor' [inherits from <class 'base.InputGadget'>]:
 	any gadget which value of interest is a physical scalar quantity should inherit this.
-	method 'getIntensity':
+	method 'value':
 		returns: <class 'float'>
 		description: returns the intensity of the quantity measured by the device.
 
 class 'VectorSensor' [inherits from <class 'base.InputGadget'>]:
 	any gadget which value of interest is a physical vector quantity should inherit this.
-	method 'getYIntensity':
-		returns: <class 'float'>
-		description: returns the intensity of the quantity measured by the device on the y axis.
-	method 'getXIntensity':
+	method 'value_x':
 		returns: <class 'float'>
 		description: returns the intensity of the quantity measured by the device on the x axis.
-	method 'getZIntensity':
+	method 'value_y':
+		returns: <class 'float'>
+		description: returns the intensity of the quantity measured by the device on the y axis.
+	method 'value_z':
 		returns: <class 'float'>
 		description: returns the intensity of the quantity measured by the device on the z axis.
 
@@ -85,14 +89,14 @@ class 'FlameThrower' [inherits from <class 'base.OutputGadget'>]:
 class 'DistanceSensor' [inherits from <class 'base.ScalarSensor'>]:
 	interface that represents distance sensors. it may be an ultrassonic or infrared one,
        for example.
-	method 'getDistance':
+	method 'value':
 		returns: <class 'float'>
 		description: returns the distance from the sensor in meters. the return value must be 
            greater or equal to zero.
 
 class 'LuminositySensor' [inherits from <class 'base.ScalarSensor'>]:
 	interface that represents a light sensor.
-	method 'getLuminosity':
+	method 'value':
 		returns: <class 'float'>
 		description: gets the luminosity read by the sensor. the return value must be between [0,1], 
            whereas 0 is the mininum luminosity possibly readable by the sensor 
@@ -100,7 +104,7 @@ class 'LuminositySensor' [inherits from <class 'base.ScalarSensor'>]:
 
 class 'GPS' [inherits from <class 'base.Receiver'>]:
 	interface that represents a GPS receiver device.
-	method 'getNMEAMessage':
+	method 'get_nmea_message':
 		returns: <class 'str'>
 		description: gets a standard NMEA message from device.
 

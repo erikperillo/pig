@@ -26,7 +26,7 @@ class Gadget(object):
            return: str"""
         raise NotImplementedError(NOT_IMPLEMENTED_MSG)
     def supports(self, platform):
-        """returns whether the gadget is designed for some platform
+        """returns true if the gadget is designed for some platform or false if not
            platform: str
            return: bool"""
         raise NotImplementedError(NOT_IMPLEMENTED_MSG)

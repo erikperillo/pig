@@ -80,7 +80,7 @@ class LuminositySensor(base.ScalarSensor):
 
 class GPS(base.Receiver):
     """interface that represents a GPS receiver device."""
-    def get_NMEA_message(self):
+    def get_nmea_message(self):
         """gets a standard NMEA message from device.
            return: str""" 
         raise NotImplementedError(base.NOT_IMPLEMENTED_MSG)
