@@ -21,11 +21,13 @@ NOT_IMPLEMENTED_MSG = "method must be implemented to comply with the interface"
 
 class Gadget(object):
     """all gadgets should inherit this."""
-    def model_name(self):
+    @classmethod
+    def get_model_name(cls):
         """returns the device's model name.
            return: str"""
         raise NotImplementedError(NOT_IMPLEMENTED_MSG)
-    def supports(self, platform):
+    @classmethod
+    def supports(cls, platform):
         """returns true if the gadget is designed for some platform or false if not
            platform: str
            return: bool"""
